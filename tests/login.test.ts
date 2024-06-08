@@ -5,7 +5,7 @@ test.beforeAll(async ({}, testInfo) => {
     
 });
   
-test.only("Login test demo", async ({page, context}) => {
+test("Login test demo", async ({page, context}) => {
 
     await page.goto("https://beta.hideout.cyberplusplus.io/");
     await page.getByPlaceholder(' ').fill('wwtest@mailinator.com');
