@@ -8,7 +8,6 @@ pipeline {
             bat 'npm ci'
             bat 'npm i -D @playwright/test'
             bat 'npx playwright test'
-            bat 'npx playwright show-report'
          }
       }
    }
