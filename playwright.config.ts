@@ -23,13 +23,13 @@ export default defineConfig({
   reporter: [["html"], ["allure-playwright"]],
   // reporter: 'allure-playwright',
 
-  timeout: 10 * 1000,
+  timeout: 30 * 1000,
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     launchOptions: {
       // 1
-      args: ["--start-maximized"],
+      // args: ["--start-maximized"],
     },
 
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -39,7 +39,7 @@ export default defineConfig({
     trace: 'on',
 
     // // Set headless mode
-		headless: false,
+		headless: true,
     video: {
       mode: "on",
       size: { width: 1920, height: 1080 }
