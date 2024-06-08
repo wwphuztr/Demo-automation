@@ -6,6 +6,7 @@ pipeline {
             bat 'npm install'
             bat 'npx playwright install'
             bat 'npm ci'
+            bat 'npm i -D @playwright/test'
             bat 'npx playwright test'
          }
       }
