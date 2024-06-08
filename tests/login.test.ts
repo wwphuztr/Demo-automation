@@ -1,9 +1,9 @@
 import test, { Page, chromium } from "@playwright/test";
 
 
-test.beforeAll(async ({}, testInfo) => {
+// test.beforeAll(async ({}, testInfo) => {
     
-});
+// });
   
 test("Login test demo", async ({page, context}) => {
 
@@ -19,6 +19,6 @@ test("Login test demo", async ({page, context}) => {
 
 })
 
-test.afterAll(async ({browser}, testInfo) => {
-    
-});
+// test.afterAll(async ({browser}, testInfo) => {
+//     await browser.close();
+// });
