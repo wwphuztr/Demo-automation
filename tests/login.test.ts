@@ -15,10 +15,18 @@ test("Login test demo", async ({page, context, browser}) => {
     const page2 = await context.newPage();
     await page2.bringToFront();
     await page2.goto("https://www.mailinator.com/v4/public/inboxes.jsp");
-    await page2.waitForLoadState('networkidle')
-    await page2.waitForLoadState('networkidle')
+})
 
+test("Navigate URL", async ({page, context, browser}) => {
 
+    await page.goto("https://chatgpt.com/");
+    await page.waitForLoadState('networkidle');
+})
+
+test("Navigate URL2", async ({page, context, browser}) => {
+
+    await page.goto("https://ngrok.com/download");
+    await page.waitForLoadState('networkidle');
 })
 
 // test.afterAll(async ({browser}, testInfo) => {
