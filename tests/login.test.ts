@@ -16,6 +16,8 @@ test("Login test demo", async ({page, context, browser}) => {
     await page2.bringToFront();
     await page2.goto("https://www.mailinator.com/v4/public/inboxes.jsp");
     await page2.waitForLoadState('networkidle')
+    await page2.waitForLoadState('networkidle')
+
 
 })
 
