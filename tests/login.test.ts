@@ -1,21 +1,32 @@
 import test, { Page, chromium, expect } from "@playwright/test";
 import { log } from "console";
 
+function generateUniqueNumber(): string {
+    const now = new Date();
+    return now.getFullYear().toString() +
+           (now.getMonth() + 1).toString().padStart(2, '0') +
+           now.getDate().toString().padStart(2, '0') +
+           now.getHours().toString().padStart(2, '0') +
+           now.getMinutes().toString().padStart(2, '0') +
+           now.getSeconds().toString().padStart(2, '0') +
+           now.getMilliseconds().toString().padStart(3, '0');
+}
 
 test.beforeAll(async ({}, testInfo) => {
 });
   
-test("Login test demo", async ({page, context, browser, isMobile}) => {
-    const desktop_email = "wwtest17@mailinator.com";
-    const mobile_email = "wwtest18@mailinator.com";
+test("Login test demo", async ({page, context, isMobile}) => {
+    const mailPlatform = "@maildrop.cc";
+    const desktop_email = "wdtest" + generateUniqueNumber();
+    const mobile_email = "wmtest4" + generateUniqueNumber();
     await page.goto("https://beta.cyberplusplus.io/khoa-top-site");
     
     if(isMobile) {
         await page.getByRole('button', { name: 'Accept all cookies' }).click();
-        await page.locator("//input[@id='email']").fill(mobile_email);
+        await page.locator("//input[@id='email']").fill(mobile_email + mailPlatform);
     }
     else {
-        await page.locator("//input[@id='email']").fill(desktop_email);
+        await page.locator("//input[@id='email']").fill(desktop_email + mailPlatform);
     }
 
     await page.locator("//button[text()='Sign In']").click();
@@ -23,24 +34,23 @@ test("Login test demo", async ({page, context, browser, isMobile}) => {
 
     const page2 = await context.newPage();
     await page2.bringToFront();
-    await page2.goto("https://www.mailinator.com/v4/public/inboxes.jsp");
     
-    if(isMobile) {
-        await page2.getByLabel('inbox field').fill(mobile_email);
-    }
-    else {
-        await page2.getByLabel('inbox field').fill(desktop_email);
-    }
-
-    await page2.getByRole('button', { name: 'GO' }).click();
-    await page2.locator("((//*[*[normalize-space()='Cyber++'] and *[normalize-space()='just now'] ])[last()]//*[normalize-space()='Agilyte account security code'])[1]").click();
     let otp;
-
+    let otpLocator = page2.frameLocator("//iframe[@class='w-full overflow-scroll']").locator("//*[text()='10 minutes']/following::*[1]");
     if(isMobile) {
-        otp = await page2.frameLocator('iframe[name="html_msg_body"]').locator("//*[text()='10 minutes']/following::*[1]").textContent();
+        await expect(async ()=> {
+            await page2.goto("https://maildrop.cc/inbox/?mailbox=" + mobile_email);
+            await page2.locator("(//*[contains(text(), 'Cyber')])[1]").click();
+            await expect(otpLocator).toBeVisible();
+            otp = await otpLocator.textContent();
+        }).toPass({intervals: [5000]});
     }
     else {
-        otp = await page2.frameLocator('iframe[name="html_msg_body"]').locator("//*[text()='10 minutes']/following::*[1]").textContent();
+        await expect(async ()=> {
+            await page2.goto("https://maildrop.cc/inbox/?mailbox=" + desktop_email);
+            await expect(otpLocator).toBeVisible();
+            otp = await otpLocator.textContent();
+        }).toPass({intervals: [5000]});
     }
 
     await page.bringToFront();
@@ -54,7 +64,3 @@ test("Login test demo", async ({page, context, browser, isMobile}) => {
         await expect(page.locator("//*[text()='OPEN TASK(s)']")).toHaveText('OPEN TASK(s)');
     }
 })
-
-// test.afterAll(async ({browser}, testInfo) => {
-//     await browser.close();
-// });

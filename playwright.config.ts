@@ -18,18 +18,21 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 0 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 4 : undefined,
+  workers: process.env.CI ? 4 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [["html"], ["allure-playwright"]],
   // reporter: 'allure-playwright',
 
-  timeout: 30 * 1000,
+  timeout: 60 * 1000,
+  expect: {
+    timeout: 10 * 1000
+  },
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     launchOptions: {
       // 1
-      // args: ["--start-maximized"],
+      args: ["--start-maximized"],
     },
 
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -39,7 +42,7 @@ export default defineConfig({
     trace: 'on',
 
     // // Set headless mode
-		headless: true,
+		headless: false,
     video: {
       mode: "on",
       size: { width: 1920, height: 1080 }
