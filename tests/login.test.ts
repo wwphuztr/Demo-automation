@@ -208,7 +208,7 @@ test("Verify display of Homepage site (Using element comparision)", async ({page
     // )
 })
 
-test.only("Verify display of Homepage site (Using image comparision)", async ({page, context, isMobile}) => {
+test("Verify display of Homepage site (Using image comparision)", async ({page, context, isMobile}) => {
     await page.goto(url);
     const user = "wmtest42024061615545432";
     const mail = user + mailPlatform;
