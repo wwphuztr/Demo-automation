@@ -260,7 +260,6 @@ test("Verify display of Homepage site (Using image comparision)", async ({page, 
     // await expect(page).toHaveScreenshot("testing.png", {fullPage: true});
     // Verify components of HomePage
     // Verify the Hamburger button at the right top by attribute 'd' of svg
-    await page.pause();
     await expect(page.locator("//*[(name()='path' and @d='M3.75 12H20.25')]/ancestor::*[name()='svg']")).toHaveScreenshot("hambuger.png");
 
     //====================== Verify Left Menu ======================///
