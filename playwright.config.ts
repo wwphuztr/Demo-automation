@@ -59,10 +59,10 @@ export default defineConfig({
         viewport: null},
     },
 
-    {
-      name: 'mobile',
-      use: { ...devices['iPhone 12'] },
-    },
+    // {
+    //   name: 'mobile',
+    //   use: { ...devices['iPhone 12']},
+    // },
 
     // {
     //   name: 'webkit',
