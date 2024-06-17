@@ -46,7 +46,7 @@ export default defineConfig({
     trace: 'on',
 
     // // Set headless mode
-		headless: false,
+		headless: true,
     video: {
       mode: "on",
       size: { width: 1920, height: 1080 }
