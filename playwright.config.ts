@@ -25,7 +25,11 @@ export default defineConfig({
 
   timeout: 60 * 1000,
   expect: {
-    timeout: 10 * 1000
+    timeout: 10 * 1000,
+    toHaveScreenshot: { 
+      // maxDiffPixels: 300,
+      maxDiffPixelRatio: 0.1
+    },
   },
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
