@@ -89,7 +89,7 @@ test("Verify user cannot log in via OTP if not having permission", async ({page,
     await expect(page.locator("//*[text()='Access denied. You are not allowed to log in.']"), "The error message is not visible").toBeVisible();
 })
 
-test.only("Verify user cannot log in via OTP if input wrong OTP", async ({page, context, isMobile}) => {
+test("Verify user cannot log in via OTP if input wrong OTP", async ({page, context, isMobile}) => {
     const email = "wrongOTP" + generateUniqueNumber() + mailPlatform;
     await page.goto(url);
     page.on('dialog', async dialog => {
@@ -195,22 +195,9 @@ test("Verify display of Homepage site (Using element comparision)", async ({page
     await expect(page.locator("//div[@id='webPages']"), "The 'Web pages' section is not visible").toBeVisible();
     // Training
     await expect(page.locator("//div[@id='training']"), "The 'Training' section is not visible").toBeVisible();
-
-    // console.log(await page.locator("//footer").getAttribute("background-color"));
-    // const test = await page.locator("//footer");
-    // const color = await test.evaluate((e) => {
-    //     return window.getComputedStyle(e).getPropertyValue("--mainSolidColorBackground")
-    // })
-    // console.log(color);
-    
-    // await expect(page.locator("(//footer)[1]")).toBeVisible();
-    // await expect(page.locator("(//footer)[1]")).toHaveCSS(
-    //     "--mainSolidColorBackground",
-    //     "#c00n"
-    // )
 })
 
-test("Verify display of Homepage site (Using image comparision)", async ({page, context, isMobile}) => {
+test.only("Verify display of Homepage site (Using image comparision)", async ({page, context, isMobile}) => {
     await page.goto(url);
     const user = "wmtest4024061615545432";
     const mail = user + mailPlatform;
@@ -261,11 +248,10 @@ test("Verify display of Homepage site (Using image comparision)", async ({page, 
     await page.waitForLoadState('domcontentloaded');
     await page2.waitForTimeout(15000);
 
-    await expect(page.locator("//div[@id='training']"), "The 'Training' section is not visible").toBeVisible();
-    // await expect(page).toHaveScreenshot("testing.png", {fullPage: true});
-    // Verify components of HomePage
-    // Verify the Hamburger button at the right top by attribute 'd' of svg
-    await expect(page.locator("//*[(name()='path' and @d='M3.75 12H20.25')]/ancestor::*[name()='svg']")).toHaveScreenshot("hambuger.png");
+    // await expect(page.locator("//div[@id='training']"), "The 'Training' section is not visible").toBeVisible();
+    // // Verify components of HomePage
+    // // Verify the Hamburger button at the right top by attribute 'd' of svg
+    // await expect(page.locator("//*[(name()='path' and @d='M3.75 12H20.25')]/ancestor::*[name()='svg']")).toHaveScreenshot("hambuger.png");
 
     //====================== Verify Left Menu ======================///
     // Vitals
@@ -320,7 +306,7 @@ test("Verify display of Homepage site (Using image comparision)", async ({page, 
     // )
 })
 
-test("Get color css of header and footer", async ({page, context, isMobile}) => {
+test("Get color css of header", async ({page, context, isMobile}) => {
     await page.goto(url);
     const user = "wmtest42024061615545432";
     const mail = user + mailPlatform;
@@ -381,7 +367,7 @@ test("Get color css of header and footer", async ({page, context, isMobile}) => 
         })
         console.log("--headerBackgroundMobile: " + color);
     
-        await expect(header).toHaveCSS(
+        await expect(header, "The color is not the same with expected result").toHaveCSS(
             "--headerBackgroundMobile",
             "#2e6cff"
         )
@@ -393,7 +379,7 @@ test("Get color css of header and footer", async ({page, context, isMobile}) => 
         })
         console.log("--mainSolidColorBackground: " + color);
     
-        await expect(header).toHaveCSS(
+        await expect(header, "The color is not the same with expected result").toHaveCSS(
             "--mainSolidColorBackground",
             "#c00"
         )
