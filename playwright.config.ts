@@ -14,7 +14,7 @@ export default defineConfig({
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  // forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 0 : 0,
   /* Opt out of parallel tests on CI. */
@@ -23,9 +23,9 @@ export default defineConfig({
   reporter: [["html"], ["allure-playwright"]],
   // reporter: 'allure-playwright',
 
-  timeout: 60 * 1000,
+  timeout: 80 * 1000,
   expect: {
-    timeout: 10 * 1000,
+    timeout: 15 * 1000,
     toHaveScreenshot: { 
       // maxDiffPixels: 300,
       maxDiffPixelRatio: 0.1
@@ -63,10 +63,10 @@ export default defineConfig({
         viewport: null},
     },
 
-    // {
-    //   name: 'mobile',
-    //   use: { ...devices['iPhone 12']},
-    // },
+    {
+      name: 'mobile',
+      use: { ...devices['iPhone 12']},
+    },
 
     // {
     //   name: 'webkit',

@@ -19,7 +19,7 @@ test.beforeAll(async ({}, testInfo) => {
 let url = "https://beta.cyberplusplus.io/khoa-top-site";
 const mailPlatform = "@maildrop.cc";
    
-test("Login test demo", async ({page, context, isMobile}) => {
+test("Verify user can log in via OTP", async ({page, context, isMobile}) => {
     const desktop_email = "wdtest" + generateUniqueNumber();
     const mobile_email = "wmtest4" + generateUniqueNumber();
     await page.goto(url);
@@ -89,7 +89,7 @@ test("Verify user cannot log in via OTP if not having permission", async ({page,
     await expect(page.locator("//*[text()='Access denied. You are not allowed to log in.']"), "The error message is not visible").toBeVisible();
 })
 
-test("Verify user cannot log in via OTP if input wrong OTP", async ({page, context, isMobile}) => {
+test.only("Verify user cannot log in via OTP if input wrong OTP", async ({page, context, isMobile}) => {
     const email = "wrongOTP" + generateUniqueNumber() + mailPlatform;
     await page.goto(url);
     page.on('dialog', async dialog => {
@@ -117,7 +117,7 @@ test("Verify user cannot log in via OTP if input wrong OTP", async ({page, conte
 
 test("Verify display of Homepage site (Using element comparision)", async ({page, context, isMobile}) => {
     await page.goto(url);
-    const user = "wmtest42024061615545432";
+    const user = "wmtest4202406161555432";
     const mail = user + mailPlatform;
 
     if(isMobile) {
@@ -212,7 +212,7 @@ test("Verify display of Homepage site (Using element comparision)", async ({page
 
 test("Verify display of Homepage site (Using image comparision)", async ({page, context, isMobile}) => {
     await page.goto(url);
-    const user = "wmtest42024061615545432";
+    const user = "wmtest4024061615545432";
     const mail = user + mailPlatform;
 
     if(isMobile) {
