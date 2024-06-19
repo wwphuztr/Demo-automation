@@ -36,7 +36,7 @@ export default defineConfig({
   use: {
     launchOptions: {
       // 1
-      args: ["--start-maximized"],
+      // args: ["--start-maximized"],
     },
 
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -46,7 +46,7 @@ export default defineConfig({
     trace: 'on',
 
     // // Set headless mode
-		headless: true,
+		headless: false,
     video: {
       mode: "on",
       size: { width: 1920, height: 1080 }
@@ -60,7 +60,7 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         // ...devices['Desktop Chrome'],
-        viewport: null},
+        viewport: { width: 1920, height: 919 }},
     },
 
     {
