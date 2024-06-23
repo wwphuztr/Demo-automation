@@ -1,11 +1,30 @@
 pipeline {
-   agent { docker { image 'mcr.microsoft.com/playwright/python:v1.44.0-jammy' } }
-   stages {
-      stage('e2e-tests') {
-         steps {
-            sh 'pip install -r requirements.txt'
-            sh 'pytest'
-         }
+  agent { 
+    docker { 
+      image 'docker pull mcr.microsoft.com/playwright:v1.44.1-jammy'
+    } 
+  }
+  stages {
+    stage('install playwright') {
+      steps {
+        sh '''
+          npm i -D @playwright/test
+          npx playwright install
+        '''
       }
-   }
+    }
+    stage('help') {
+      steps {
+        sh 'npx playwright test --help'
+      }
+    }
+    stage('test') {
+      steps {
+        sh '''
+          npx playwright test --list
+          npx playwright test
+        '''
+      }
+    }
+  }
 }
