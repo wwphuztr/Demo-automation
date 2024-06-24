@@ -10,7 +10,7 @@ pipeline {
             // sh 'npm install'
             sh 'ls'
             sh 'npm cache clean --force'
-            sh 'npm i sharp --unsafe-perm'
+            sh 'npm install'
             sh 'npm ci'
             sh 'npx playwright test'
          }
