@@ -8,7 +8,8 @@ pipeline {
       stage('e2e-tests') {
          steps {
             // sh 'npm install'
-            // sh 'npm ci'
+            sh 'sudo npm cache clean --force'
+            sh 'npm ci'
             sh 'npx playwright test'
          }
       }
